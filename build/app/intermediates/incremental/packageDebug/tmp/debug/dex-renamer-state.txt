@@ -1,4 +1,4 @@
-#Fri Feb 19 21:43:58 CET 2021
+#Fri Feb 19 22:09:12 CET 2021
 base.0=/home/tt/Bureau/onBoardingSGL/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

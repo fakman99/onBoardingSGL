@@ -23,6 +23,12 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
+        centerTitle: true,
+        title: Text("GUIDE",
+            style: TextStyle(
+                color: Color(0xff3BB30B),
+                fontWeight: FontWeight.w300,
+                fontSize: 30)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -66,7 +72,7 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 8),
                     child: Text(
                       "Our recommendation",
                       style: TextStyle(

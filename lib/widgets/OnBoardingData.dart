@@ -29,11 +29,11 @@ class _OnbordingDataState extends State<OnbordingData> {
           SvgPicture.asset(
             imagePath,
             fit: BoxFit.fitWidth,
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.40,
+            width: 180,
+            height: 180,
           ),
           SizedBox(
-            height: 12.0,
+            height: 48.0,
           ),
           Flexible(
             child: Padding(
