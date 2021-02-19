@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'OnBoardingData.dart';
 
-/// A IntroScreen Class.
+/// A OnBoardWidget Class.
 ///
 ///
-class IntroScreen extends StatefulWidget {
-  final List<OnbordingData> onbordingDataList;
+class OnBoardWidget extends StatefulWidget {
   final MaterialPageRoute pageRoute;
 
   final MaterialPageRoute stepRoute;
 
-  IntroScreen(this.onbordingDataList, this.pageRoute, this.stepRoute);
+  OnBoardWidget(this.pageRoute, this.stepRoute);
 
   void skipPage(BuildContext context) {
     Navigator.push(context, pageRoute);
@@ -21,20 +20,124 @@ class IntroScreen extends StatefulWidget {
   }
 
   @override
-  IntroScreenState createState() {
-    return new IntroScreenState();
+  OnBoardWidgetState createState() {
+    return new OnBoardWidgetState();
   }
 }
 
-class IntroScreenState extends State<IntroScreen> {
+class OnBoardWidgetState extends State<OnBoardWidget> {
   final PageController controller = new PageController();
   int currentPage = 0;
   bool lastPage = false;
 
+  final List<OnbordingData> listData = [
+    OnbordingData(
+      imagePath: "assets/1.svg",
+      title: RichText(
+        text: new TextSpan(
+          // Note: Styles for TextSpans must be explicitly defined.
+          // Child text spans will inherit styles from parent
+          style: new TextStyle(
+            fontSize: 14.0,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            new TextSpan(
+                text: "Create a ",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300)),
+            new TextSpan(
+                text: "plant ",
+                style: TextStyle(
+                    color: Color(0xff3BB30B),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300)),
+            new TextSpan(
+              text: "and a ",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w300),
+            ),
+            new TextSpan(
+                text: "Green LAB",
+                style: TextStyle(
+                    color: Color(0xff3BB30B),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300)),
+          ],
+        ),
+      ),
+      desc:
+          "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription",
+    ),
+    OnbordingData(
+      imagePath: "assets/2.svg",
+      title: RichText(
+        text: new TextSpan(
+          // Note: Styles for TextSpans must be explicitly defined.
+          // Child text spans will inherit styles from parent
+          style: new TextStyle(
+            fontSize: 14.0,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            new TextSpan(
+                text: "Add the ",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300)),
+            new TextSpan(
+                text: "SGL ",
+                style: TextStyle(
+                    color: Color(0xff3BB30B),
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300)),
+            new TextSpan(
+              text: "controller ",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w300),
+            ),
+          ],
+        ),
+      ),
+      desc:
+          "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription",
+    ),
+    OnbordingData(
+      imagePath: "assets/3.svg",
+      title: RichText(
+        text: new TextSpan(
+          // Note: Styles for TextSpans must be explicitly defined.
+          // Child text spans will inherit styles from parent
+          style: new TextStyle(
+            fontSize: 14.0,
+            color: Colors.black,
+          ),
+          children: <TextSpan>[
+            new TextSpan(
+                text: "Explore",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300)),
+          ],
+        ),
+      ),
+      desc:
+          "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription",
+    ),
+  ];
+
   void _onPageChanged(int page) {
     setState(() {
       currentPage = page;
-      if (currentPage == widget.onbordingDataList.length - 1) {
+      if (currentPage == listData.length - 1) {
         lastPage = true;
       } else {
         lastPage = false;
@@ -69,7 +172,7 @@ class IntroScreenState extends State<IntroScreen> {
           new Expanded(
             flex: 3,
             child: new PageView(
-              children: widget.onbordingDataList,
+              children: listData,
               controller: controller,
               onPageChanged: _onPageChanged,
             ),
@@ -127,7 +230,7 @@ class IntroScreenState extends State<IntroScreen> {
                           fontWeight: FontWeight.w300,
                           fontSize: 16.0)),
                   onPressed: () => lastPage
-                      ? widget.skipPage(context)
+                      ? widget.stepPage(context)
                       : controller.nextPage(
                           duration: Duration(milliseconds: 450),
                           curve: Curves.easeIn),
