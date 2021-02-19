@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:im_stepper/stepper.dart';
 
 class StepperShopScreen extends StatefulWidget {
@@ -11,22 +12,36 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
 
   int upperBound = 3; // upperBound MUST BE total number of icons minus 1.
 
+  List<String> asset = [
+    "assets/furniture.svg",
+    "assets/screw.svg",
+    "assets/plant.svg"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 3,
+        elevation: 1,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            IconStepper(
-              icons: [
-                Icon(Icons.supervised_user_circle),
-                Icon(Icons.flag),
-                Icon(Icons.access_alarm),
+            NumberStepper(
+              stepReachedAnimationDuration: Duration(seconds: 2),
+              lineColor: Color(0xff3BB30B),
+              activeStepColor: Color(0xff3BB30B),
+              activeStepBorderColor: Color(0xff3BB30B),
+              numberStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w300),
+              stepRadius: 28,
+              numbers: [
+                1,
+                2,
+                3,
               ],
 
               // activeStep property set to activeStep variable defined above.
@@ -41,16 +56,12 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
             ),
             header(),
             Expanded(
-              child: FittedBox(
-                child: Center(
-                  child: Text('$activeStep'),
-                ),
-              ),
+              child: SvgPicture.asset(asset[activeStep]),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                previousButton(),
+                previousButton(activeStep),
                 nextButton(),
               ],
             ),
@@ -61,7 +72,19 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
   }
 
   Widget nextButton() {
-    return ElevatedButton(
+    return FlatButton(
+      color: Color(0xff3BB30B),
+      textColor: Colors.white,
+      disabledColor: Colors.grey,
+      disabledTextColor: Colors.black,
+      padding: EdgeInsets.all(8.0),
+      splashColor: Colors.blueAccent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Text("NEXT",
+          style: new TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+              fontSize: 16.0)),
       onPressed: () {
         // Increment activeStep, when the next button is tapped. However, check for upper bound.
         if (activeStep < upperBound) {
@@ -70,32 +93,41 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
           });
         }
       },
-      child: Text('Next'),
     );
   }
 
   /// Returns the previous button.
-  Widget previousButton() {
-    return ElevatedButton(
-      onPressed: () {
-        // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
-        if (activeStep > 0) {
+  Widget previousButton(activeStep) {
+    if (activeStep == 0) {
+      return Container();
+    } else {
+      return FlatButton(
+        color: Color(0xff3BB30B),
+        textColor: Colors.white,
+        disabledColor: Colors.grey,
+        disabledTextColor: Colors.black,
+        padding: EdgeInsets.all(8.0),
+        splashColor: Colors.blueAccent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Text("PREVIOUS",
+            style: new TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w300,
+                fontSize: 16.0)),
+        onPressed: () {
+          // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
+
           setState(() {
             activeStep--;
           });
-        }
-      },
-      child: Text('Prev'),
-    );
+        },
+      );
+    }
   }
 
   /// Returns the header wrapping the header text.
   Widget header() {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.orange,
-        borderRadius: BorderRadius.circular(5),
-      ),
       child: Row(
         children: [
           Padding(
@@ -103,9 +135,9 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
             child: Text(
               headerText(),
               style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
+                  color: Color(0xff3BB30B),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w300),
             ),
           ),
         ],
@@ -117,16 +149,13 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
   String headerText() {
     switch (activeStep) {
       case 1:
-        return 'Preface';
+        return 'Get a bundle';
 
       case 2:
-        return 'Table of Contents';
-
-      case 3:
-        return 'About the Author';
+        return 'Start growing';
 
       default:
-        return 'Introduction';
+        return 'Get any furniture';
     }
   }
 }
