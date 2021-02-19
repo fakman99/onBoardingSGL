@@ -56,7 +56,70 @@ class _StepperShopScreenState extends State<StepperShopScreen> {
             ),
             header(),
             Expanded(
-              child: SvgPicture.asset(asset[activeStep]),
+              child: SvgPicture.asset(
+                asset[activeStep],
+                width: 212,
+                height: 212,
+              ),
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Our recommendation",
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: SizedBox(
+                  child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 8,
+                itemExtent: 180.0,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0, vertical: 4.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.grey,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: CircleAvatar(
+                                radius: 14.0,
+                                backgroundColor: Color(0xff3BB30B),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "IkeHigh",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              )),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
