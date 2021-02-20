@@ -1,4 +1,4 @@
-import 'package:Onboard/pages/stepper.dart';
+import 'package:Onboard/pages/stepper_page.dart';
 import 'package:Onboard/pages/suite.dart';
 import 'package:Onboard/widgets/OnBoardingData.dart';
 import 'package:Onboard/widgets/onBoard_widget.dart';
